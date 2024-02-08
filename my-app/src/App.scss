@@ -1,1 +1,17 @@
+@import '../src/styles/constants';
+
+
+.App {
+  background-color: $backgroundColorBlue;
+  min-width: 100vw;
+  min-height: 100vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+
+
+
 

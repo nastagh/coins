@@ -1,0 +1,82 @@
+@import '../styles/constants';
+
+
+.login-container {
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+
+
+.sign-in-button-color {
+  @include background-gradient;
+  color: $textNude;
+  width: 100%;
+  border: none;
+
+  &:active {
+    color: $textNudeActive;
+  }
+}
+
+.sign-in-button {
+  border-radius: 40px;
+  padding: 15px 35px;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: rgba(170, 136, 221, 0.1) 0 6px 25px;
+    scale: 0.98;
+  }
+}
+
+.sign-in-button-transparent {
+  background-color: transparent;
+  color: white;
+  border: 0.7px solid $grey;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+
+.sign-in-variants-button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+
+.sign-in-img {
+  width: 20px;
+}
+
+.lines-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+
+  >span {
+    display: block;
+    border-top: 1px solid $grey;
+    flex-grow: 1;
+  }
+}
+
+
+.text-forgot {
+  font-size: 14px;
+  text-align: end;
+  margin-bottom: 15px;
+}
+
+.link {
+  color: $forgotText;
+  font-weight: 600;
+}

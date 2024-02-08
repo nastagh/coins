@@ -1,0 +1,14 @@
+$backgroundColorBlue: #0e0e32;
+$textNude: #f3d3ff;
+$textNudeActive:rgb(240, 227, 245);
+$grey: #908fb1;
+$inputColorGrey: #28264b;
+$forgotText: #7851c8;
+
+@mixin background-gradient {
+  background: linear-gradient(90deg, rgb(164, 64, 245) 0%, rgba(79,60,250,1) 99%);
+
+  &:active {
+    background: linear-gradient(90deg, rgb(124, 46, 188) 0%, rgb(51, 35, 194) 99%);
+  }
+}
