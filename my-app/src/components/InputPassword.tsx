@@ -1,5 +1,9 @@
 import React from 'react';
 
+// type InputPasswordType = {
+
+// }
+
 const InputPassword: React.FC<{ name: string; type: string; placeholder: string }> = (props) => {
   return (
     <>

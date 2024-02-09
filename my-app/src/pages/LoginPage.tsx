@@ -1,10 +1,12 @@
 import { Typography } from '@mui/material';
 import '../styles/login.scss';
-import AdditionalButtonsSignIn from './AdditionalButtonsSignIn';
-import ButtonSignIn from './ButtonSignIn';
-import Form from './Form';
-import InputPassword from './InputPassword';
-import InputEmail from './InputEmail';
+import { useState } from 'react';
+import AdditionalButtonsSignIn from 'components/AdditionalButtonsSignIn';
+import Form from 'components/Form';
+import InputEmail from 'components/InputEmail';
+import InputPassword from 'components/InputPassword';
+import ButtonSignIn from 'components/ButtonSignIn';
+import ModalForgetPassword from 'components/ModalForgetPassword';
 
 enum InputName {
   Email = 'Email',
@@ -12,7 +14,11 @@ enum InputName {
 }
 
 
-const LoginComponent = () => {
+const LoginPage = () => {
+
+  const [openForgetModal, setOpenForgetModal]=useState(false);
+
+
   return (
     <>
       <div className='login-container'>
@@ -25,21 +31,22 @@ const LoginComponent = () => {
           or Sign in with Email
           <span></span>
         </div>
-        <Form>
+        <Form >
           <InputEmail name={InputName.Email} type='email' placeholder='Email' />
           <InputPassword name={InputName.Password} type='password' placeholder='Password' />
           <div className='text-forgot'>
-            <a href='' className='link' title='forgot'>
+            <span className='link' onClick={() => setOpenForgetModal(true)}>
               Forgot password?
-            </a>
+            </span>
           </div >
           <ButtonSignIn />
         </Form>
+        {openForgetModal && <ModalForgetPassword open={openForgetModal} onClose={(open)=>setOpenForgetModal(open)}/>}
         <p>
           Don't have an account?
-          <a href='' className='link' title='join'>
+          <span className='link'>
             Join now
-          </a>
+          </span>
         </p>
       </div>
     </>
@@ -47,4 +54,4 @@ const LoginComponent = () => {
 
 }
 
-export default LoginComponent;
+export default LoginPage;

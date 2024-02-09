@@ -5,7 +5,7 @@ import React from "react";
 const ButtonSignIn = () => {
   return (
     <React.Fragment>
-      <button type='submit' className='sign-in-button-color sign-in-button' onClick={() => console.log('sign in')}>
+      <button type='submit' className='sign-in-button-color sign-in-button'>
         Sign in
       </button>
     </React.Fragment>

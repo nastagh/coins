@@ -8,7 +8,7 @@ const AdditionalButtonsSignIn = () => {
       <div className='sign-in-variants-button-container'>
         {accounts.map(account => 
            (
-            <div className='sign-in-button sign-in-button-transparent'>
+            <div className='sign-in-button sign-in-button-transparent' key={account.name}>
               <img alt={account.name} title={account.name} src={account.img} className='sign-in-img'>
               </img>
               Sign in with {account.name}
