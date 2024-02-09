@@ -1,13 +1,11 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+
 
 export const myTheme  = createTheme({
   palette: {
-    secondary: {
+    primary: {
       main: '#211f44'
     }
-    // purple: {
-    //   main: '#211f44'
-    // },
   }
 })
 

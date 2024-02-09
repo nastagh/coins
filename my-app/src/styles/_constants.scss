@@ -4,11 +4,45 @@ $textNudeActive:rgb(240, 227, 245);
 $grey: #908fb1;
 $inputColorGrey: #28264b;
 $forgotText: #7851c8;
+$modalBackground: #211f44;
+$darkGrey: #1a1a40;
+
 
 @mixin background-gradient {
   background: linear-gradient(90deg, rgb(164, 64, 245) 0%, rgba(79,60,250,1) 99%);
 
   &:active {
     background: linear-gradient(90deg, rgb(124, 46, 188) 0%, rgb(51, 35, 194) 99%);
+  }
+}
+
+
+@mixin form-input {
+  color: $grey;
+  border: none;
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: 15px;
+}
+
+@mixin color-button {
+  @include background-gradient;
+  color: $textNude;
+  width: 100%;
+  border: none;
+
+  &:active {
+    color: $textNudeActive;
+  }
+}
+
+@mixin common-style-button {
+  border-radius: 40px;
+  padding: 15px 35px;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: rgba(170, 136, 221, 0.1) 0 6px 25px;
+    scale: 0.98;
   }
 }
