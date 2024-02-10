@@ -9,3 +9,9 @@ export const accounts = [
   }
 ]
 
+
+export const passwordEyes = {
+  eyeOpen: '../assets/images/show.svg',
+  eyeClose: '../assets/images/hidden.svg'
+}
+

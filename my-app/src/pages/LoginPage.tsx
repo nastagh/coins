@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import '../styles/login.scss';
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 import AdditionalButtonsSignIn from 'components/AdditionalButtonsSignIn';
 import Form from 'components/Form';
 import InputEmail from 'components/InputEmail';
@@ -16,25 +16,47 @@ enum InputName {
   Password = 'Password',
 }
 
+export type PasswordResetData = {
+  email?: string, 
+  code?: string
+}
 
 const LoginPage = () => {
 
-  // const [openForgetModal, setOpenForgetModal]=useState(false);
   const [showModal, setShowModal] = useState(false);
-  // const [showVerifyModal, setShowVerifyModal] = useState(false);
-  const [currentModal, setCurrentModal] = useState(<div />);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [passwordResetData, setPasswordResetData] = useState<PasswordResetData>({});
 
-  // let modalType: ReactNode = <ModalForgetPassword onClose={() => setShowModal(false)}
-  //   openNext={(open) => { setShowVerifyModal(open); selectModal() }}
-  // />
+  const handleNext = (data: PasswordResetData) => {
+    setPasswordResetData({...passwordResetData, ...data});
+    if (currentStep < steps.length -1) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      setShowModal(false);
+      setCurrentStep(0);
+    }
+  }
 
+  const handleBack = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    }
+  }
 
-  // const selectModal = () => {
-  //   if (showVerifyModal) {
-  //     console.log('hi')
-  //     modalType = <ModalEmailVerification onClose={() => setShowModal(false)} />
-  //   }
-  // }
+  const steps = [
+    {
+      id: 0,
+      component: <ModalForgetPassword onSubmit={handleNext}/>
+    },
+    {
+      id: 1,
+      component: <ModalEmailVerification onSubmit={handleNext} />
+    },
+    {
+      id: 2,
+      component: <ModalResetPassword onSubmit={handleNext} />
+    }
+  ];
 
   return (
     <>
@@ -49,29 +71,20 @@ const LoginPage = () => {
           <span></span>
         </div>
         <Form >
-          <InputEmail name={InputName.Email} type='email' placeholder='Email' />
-          <InputPassword name={InputName.Password} type='password' placeholder='Password' />
+          <InputEmail name={InputName.Email} placeholder='Email' className='form-input' />
+          <InputPassword name={InputName.Password} placeholder='Password' className='form-input' />
           <div className='text-forgot'>
             <span className='link' onClick={() => {
               setShowModal(true);
-
-              setCurrentModal(<ModalForgetPassword onClose={() => setShowModal(false)}
-                openNext={() => setCurrentModal(<ModalEmailVerification 
-                                                      onClose={() => setShowModal(false)} 
-                                                      openNext={() => setCurrentModal(<ModalResetPassword onClose={() => setShowModal(false)}/>)}
-                                                      />)}
-              />)
             }}>
               Forgot password?
             </span>
           </div >
           <ButtonSignIn />
         </Form>
-        {showModal && <ModalWindow open={showModal}>
-          {currentModal}
-          {/* <ModalForgetPassword onClose={(open) => setShowModal(open)} /> */}
+        {showModal && <ModalWindow open={showModal} onClose={() => setShowModal(false)} showBack={currentStep !== 0} onBack={handleBack}>
+          {steps[currentStep].component}
         </ModalWindow>}
-        {/* {openForgetModal && <ModalForgetPassword open={openForgetModal} onClose={(open) => setOpenForgetModal(open)}/>} */}
         <p>
           Don't have an account?
           <span className='link'>

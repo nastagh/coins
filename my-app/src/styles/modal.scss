@@ -11,9 +11,9 @@
   border: none;
   color: white;
   padding: 35px 50px;
-  gap: 45px;
-  // min-width: 410px;
+  gap: 35px;
   width: 410px;
+  position: relative;
 }
 
 .modal-tittle.css-107zp01-JoyDialogTitle-root {
@@ -23,8 +23,8 @@
 }
 
 .modal-plane.css-13gzoxo-JoyModalClose-root {
-  top: 4px;
-  right: 0px;
+  top: 30px;
+  right: 15px;
   border-radius: 50%;
   border: 0.8px solid $grey;
 }
@@ -34,29 +34,27 @@
   color: $grey;
 }
 
-.modal-arrow.css-lw08pq-MuiSvgIcon-root {
+.modal-arrow.css-i4bv87-MuiSvgIcon-root {
   min-width: var(--IconButton-size, 2.25rem);
   min-height: var(--IconButton-size, 2.25rem);
+  fill: $grey;
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+
   &:hover {
     border: 1px solid $grey;
     border-radius: 50%;
   }
 }
 
-.modal-input.css-1eed5fa-MuiInputBase-root-MuiInput-root {
+.modal-input {
   @include form-input;
   background-color: $darkGrey;
-  margin-bottom: 25px;
-
-  &::after {
-    border-bottom: none;
-  }
-
-  &::before {
-    border-bottom: none;
-    content: none;
-  }
 }
+
+
 .modal-submit-button {
   @include common-style-button;
   @include color-button;
@@ -65,4 +63,17 @@
 
 .verify-text {
   text-align: center;
+}
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+}
+
+.message-code {
+  color: $errorMessageColor;
+  position: absolute;
+  font-size: 12px;
 }

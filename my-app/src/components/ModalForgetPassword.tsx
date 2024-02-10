@@ -1,49 +1,55 @@
-import { FormControl, Input, Modal, Stack} from "@mui/material";
-import ModalDialog from '@mui/joy/ModalDialog';
-import React from "react";
-import { DialogContent, DialogTitle, ModalClose } from "@mui/joy";
-import { ArrowLeftIcon } from "@mui/x-date-pickers";
+import { Stack } from "@mui/material";
+import React, { useState } from "react";
+import { DialogContent, DialogTitle} from "@mui/joy";
 import '../styles/modal.scss';
+import { PasswordResetData } from "pages/LoginPage";
+import InputEmail from "./InputEmail";
 
-export type ModalForgetPassword = {
-  openNext: () => void,
-  onClose: (close: boolean) => void,
+export type ModalPropsType = {
+  onSubmit: (data: PasswordResetData) => void,
+  data?: { email?: string, code?: string },
 }
 
 
-const ModalForgetPassword: React.FC<ModalForgetPassword> = ({ openNext, onClose }) => {
-  
+const ModalForgetPassword: React.FC<ModalPropsType> = ({ onSubmit }) => {
+  const [showMessage, setShowMessage] = useState(false);
+
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const email = formData.get('email') as string;
+
+    if (email === '') {
+      setShowMessage(true);
+    } else {
+      onSubmit({ email });
+      setShowMessage(false);
+    }
+
+    // должна емейл отправить на сервер, и если сервер вернул положительный ответ, то идем дальше, если нет то показываем валидационную оишбку
+  }
 
   return (
-      <React.Fragment>
-        {/* <Modal open={open} onClose={() => onClose(false)} className="modal-wrapper"> */}
-          <ModalDialog  className="modal-container">
-            <DialogTitle className="modal-tittle" >
-              <ArrowLeftIcon sx={{ cursor: 'pointer' }} onClick={() => onClose(false)} className="modal-arrow"/>
-              Forgot password
-            <ModalClose variant="plain" onClick={() => onClose(false)} className='modal-plane'/>
-            </DialogTitle>
-            <DialogContent className="modal-content">
-              Enter the email you used to register <br/> with and we'll send you a code to <br/> reset your password.
-            </DialogContent>
-            <form onSubmit={(e: React.SyntheticEvent) => {
-              e.preventDefault();
-              openNext();
-              // onClose(false);
-            }}>
-              <Stack spacing={2}>
-                <FormControl>
-                  <Input placeholder="Email address" className="modal-input"/>
-                </FormControl>
-                <button type="submit" className="modal-submit-button">
-                  Send password reset code
-                </button>
-              </Stack>
-            </form>
-          </ModalDialog>
-        {/* </Modal> */}
-      </React.Fragment>
-)
+    <React.Fragment>
+        <DialogTitle className="modal-tittle" >
+          Forgot password
+        </DialogTitle>
+        <DialogContent className="modal-content">
+          Enter the email you used to register <br /> with and we'll send you a code to <br /> reset your password.
+        </DialogContent>
+        <form onSubmit={handleSubmit}>
+          <Stack spacing={5}>
+            <div>
+            <InputEmail name="email" placeholder="Email address" className="modal-input" />
+            {showMessage && <p className="message-code">**You must to write Email address</p>}
+            </div>
+            <button type="submit" className="modal-submit-button">
+              Send password reset code
+            </button>
+          </Stack>
+        </form>
+    </React.Fragment>
+  )
 
 }
 

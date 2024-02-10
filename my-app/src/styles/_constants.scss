@@ -6,7 +6,7 @@ $inputColorGrey: #28264b;
 $forgotText: #7851c8;
 $modalBackground: #211f44;
 $darkGrey: #1a1a40;
-
+$errorMessageColor:rgb(152, 48, 48);
 
 @mixin background-gradient {
   background: linear-gradient(90deg, rgb(164, 64, 245) 0%, rgba(79,60,250,1) 99%);
@@ -23,6 +23,10 @@ $darkGrey: #1a1a40;
   width: 100%;
   padding: 15px 20px;
   border-radius: 15px;
+
+  &::placeholder {
+    color: $grey;
+  }
 }
 
 @mixin color-button {
