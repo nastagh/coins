@@ -4,35 +4,37 @@ import { DialogTitle } from "@mui/joy";
 import '../styles/modal.scss';
 import { ModalPropsType } from "./ModalForgetPassword";
 import InputPassword from "./InputPassword";
+import UserApi from "services/UserApi";
+import { validatePassword } from "utils/functions";
 
-enum ErrorMessages {
+export enum ErrorMessages {
   notMatch = `**Your passwords don't match`,
-  notWrite = `**You have to write passwords`
+  inValidCode = `Invalid code`,
+  incorrectCode = `**Verification code must have 6 digits`,
+  inValidPassword = 'Password should have length at least 7 characters, at least 1 special characters and at least 1 digits'
 }
 
 
-
-const ModalResetPassword: React.FC<ModalPropsType> = ({ onSubmit }) => {
-  // при подтверждении новых паролей проверяешь что они одинаковые, и если да то отправляешь запрос на сервер 
-  // отправляем на сервер пароль
+const ModalResetPassword: React.FC<ModalPropsType> = ({ onSubmit, data }) => {
 
   const [showMessage, setShowMessage] = useState('');
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const formData = (new FormData(e.currentTarget as HTMLFormElement));
     const newPassword = formData.get('newPassword') as string;
     const confirmPassword = formData.get('confirmPassword') as string;
 
-    if (newPassword === '' || confirmPassword === '') {
-      setShowMessage(ErrorMessages.notWrite);
-    } else {
+    if (validatePassword(newPassword) && validatePassword(confirmPassword)) {
       if (newPassword === confirmPassword) {
-        onSubmit({});
-        setShowMessage('');
-      } else {
-        setShowMessage(ErrorMessages.notMatch);
+        const result = await UserApi.changePassword(data?.code as string, newPassword);
+        if (result.status === 200) {
+          onSubmit({});
+          setShowMessage('');
+        }
       }
+    } else {
+      setShowMessage(ErrorMessages.inValidPassword);
     }
   }
 

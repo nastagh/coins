@@ -4,25 +4,30 @@ import { DialogContent, DialogTitle } from "@mui/joy";
 import '../styles/modal.scss';
 import { ModalPropsType } from "./ModalForgetPassword";
 import InputEmail from "./InputEmail";
+import UserApi from "services/UserApi";
+import { ErrorMessages } from "./ModalResetPassword";
 
 
 
-const ModalEmailVerification: React.FC<ModalPropsType> = ({ onSubmit }) => {
-  const [showMessage, setShowMessage] = useState(false);
+const ModalEmailVerification: React.FC<ModalPropsType> = ({ onSubmit, data }) => {
+  const [showMessage, setShowMessage] = useState('');
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const formData = (new FormData(e.currentTarget as HTMLFormElement));
     const code = formData.get('code') as string;
 
     if (code.length === 6) {
-      onSubmit({ code });
-      setShowMessage(false)
+      const result= await UserApi.verifyCode(code);
+      if (result.status === 200) {
+        onSubmit({ code });
+        setShowMessage('')
+      } else {
+        setShowMessage(ErrorMessages.inValidCode)
+      }
     } else {
-      setShowMessage(true)
+      setShowMessage(ErrorMessages.incorrectCode)
     }
-
-    // отправляешь код на сервер, если сервер вернул положительный ответ идешь дальше, иначе показываешь сообщение "код неправильный"
   }
 
   return (
@@ -37,19 +42,18 @@ const ModalEmailVerification: React.FC<ModalPropsType> = ({ onSubmit }) => {
         <Stack spacing={5}>
           <div>
             <InputEmail name="code" placeholder="Email Verification Code" className="modal-input" type="number" />
-            {showMessage && <p className="message-code">**Verification code must have 6 digits</p>}
+            {showMessage && <p className="message-code">{showMessage}</p>}
           </div>
           <button type="submit" className="modal-submit-button">
             Verify
           </button>
         </Stack>
       </form>
-      <div className="verify-text">
+      <div className="verify-text" onClick={async () => await UserApi.createEmail(data?.email as string)}>
         Resend code
       </div>
     </React.Fragment>
   )
-
 }
 
 export default ModalEmailVerification;

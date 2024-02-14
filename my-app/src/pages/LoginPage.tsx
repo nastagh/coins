@@ -18,7 +18,7 @@ enum InputName {
 
 export type PasswordResetData = {
   email?: string, 
-  code?: string
+  code?: string,
 }
 
 const LoginPage = () => {
@@ -50,11 +50,11 @@ const LoginPage = () => {
     },
     {
       id: 1,
-      component: <ModalEmailVerification onSubmit={handleNext} />
+      component: <ModalEmailVerification onSubmit={handleNext} data={passwordResetData}/>
     },
     {
       id: 2,
-      component: <ModalResetPassword onSubmit={handleNext} />
+      component: <ModalResetPassword onSubmit={handleNext} data={passwordResetData}/>
     }
   ];
 
