@@ -6,14 +6,14 @@ import Form from 'components/Form';
 import InputEmail from 'components/InputEmail';
 import InputPassword from 'components/InputPassword';
 import ButtonSignIn from 'components/ButtonSignIn';
-import ModalForgetPassword from 'components/ModalForgetPassword';
-import ModalWindow from 'components/ModalWindow';
-import ModalEmailVerification from 'components/ModalEmailVerification';
-import ModalResetPassword from 'components/ModalResetPassword';
+import ModalForgetPassword from 'components/passwordsReset/ModalForgetPassword';
+import ModalWindow from 'components/passwordsReset/ModalWindow';
+import ModalEmailVerification from 'components/passwordsReset/ModalEmailVerification';
+import ModalResetPassword from 'components/passwordsReset/ModalResetPassword';
 
 enum InputName {
-  Email = 'Email',
-  Password = 'Password',
+  Email = 'email',
+  Password = 'password',
 }
 
 export type PasswordResetData = {
@@ -26,6 +26,7 @@ const LoginPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [passwordResetData, setPasswordResetData] = useState<PasswordResetData>({});
+
 
   const handleNext = (data: PasswordResetData) => {
     setPasswordResetData({...passwordResetData, ...data});

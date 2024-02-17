@@ -1,0 +1,25 @@
+@import '../styles/constants';
+
+.home-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+
+.home-page-buttons-container {
+  display: flex;
+  gap: 25px;
+}
+
+.home-page-buttons {
+  @include common-style-button;
+  background-color: transparent;
+  color: white;
+  border: 0.7px solid $grey;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}

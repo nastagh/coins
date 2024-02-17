@@ -1,9 +1,9 @@
 import { Stack } from "@mui/material";
 import React, { useState } from "react";
 import { DialogContent, DialogTitle } from "@mui/joy";
-import '../styles/modal.scss';
+import '../../styles/modal.scss';
 import { ModalPropsType } from "./ModalForgetPassword";
-import InputEmail from "./InputEmail";
+import InputEmail from "../InputEmail";
 import UserApi from "services/UserApi";
 import { ErrorMessages } from "./ModalResetPassword";
 
@@ -49,7 +49,7 @@ const ModalEmailVerification: React.FC<ModalPropsType> = ({ onSubmit, data }) =>
           </button>
         </Stack>
       </form>
-      <div className="verify-text" onClick={async () => await UserApi.createEmail(data?.email as string)}>
+      <div className="verify-text" onClick={async () => await UserApi.sendVerificationEmail(data?.email as string)}>
         Resend code
       </div>
     </React.Fragment>

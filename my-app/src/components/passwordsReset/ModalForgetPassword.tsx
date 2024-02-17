@@ -1,9 +1,9 @@
 import { Stack } from "@mui/material";
 import React, { useState } from "react";
 import { DialogContent, DialogTitle } from "@mui/joy";
-import '../styles/modal.scss';
+import '../../styles/modal.scss';
 import { PasswordResetData } from "pages/LoginPage";
-import InputEmail from "./InputEmail";
+import InputEmail from "../InputEmail";
 import UserApi from "services/UserApi";
 
 export type ModalPropsType = {
@@ -21,7 +21,7 @@ const ModalForgetPassword: React.FC<ModalPropsType> = ({ onSubmit }) => {
     const email = formData.get('email') as string;
 
     if (email !== '') {
-      const result = await UserApi.createEmail(email);
+      const result = await UserApi.sendVerificationEmail(email);
       if (result.status === 200) {
         onSubmit({ email });
         setShowMessage(false);

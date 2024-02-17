@@ -1,9 +1,9 @@
 import { FormControl, Stack } from "@mui/material";
 import React, { useState } from "react";
 import { DialogTitle } from "@mui/joy";
-import '../styles/modal.scss';
+import '../../styles/modal.scss';
 import { ModalPropsType } from "./ModalForgetPassword";
-import InputPassword from "./InputPassword";
+import InputPassword from "../InputPassword";
 import UserApi from "services/UserApi";
 import { validatePassword } from "utils/functions";
 

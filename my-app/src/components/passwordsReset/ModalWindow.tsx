@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
-import '../styles/modal.scss';
-import '../styles/form.scss';
+import '../../styles/modal.scss';
+import '../../styles/form.scss';
 import { Modal } from "@mui/material";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { ModalClose, ModalDialog } from "@mui/joy";
@@ -14,7 +14,6 @@ export type ModalWindowProps = {
   showBack: boolean,
   onBack: () => void,
 }
-
 
 const ModalWindow: React.FC<ModalWindowProps> = ({ open, children, onClose, showBack, onBack }) => {
 

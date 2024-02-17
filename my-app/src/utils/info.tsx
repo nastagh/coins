@@ -15,3 +15,16 @@ export const passwordEyes = {
   eyeClose: '../assets/images/hidden.svg'
 }
 
+export enum HomePageButtons {
+  Sessions = 'sessions',
+  Transactions ='transactions',
+  PersonalData ='personal Data',
+  Lougout = 'lougout'
+}
+
+export const ArrayHomePageButtons = [
+  HomePageButtons.Sessions,
+  HomePageButtons.Transactions,
+  HomePageButtons.PersonalData,
+  HomePageButtons.Lougout,
+]
