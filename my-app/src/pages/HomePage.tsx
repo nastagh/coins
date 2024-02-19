@@ -12,7 +12,8 @@ const HomePage = () => {
 
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-  const user = useAppSelector((state) => state.user.user);
+  const user = useAppSelector((state) => state.user.user.user);
+  const tokens = useAppSelector(state => state.user.user.tokens)
 
   return (
     <div className="home-page-wrapper">
@@ -26,11 +27,8 @@ const HomePage = () => {
             <div className="home-page-buttons" onClick={(e) => {
               if ((e.target as HTMLDivElement).textContent?.toLowerCase() === HomePageButtons.Lougout) {
                 e.preventDefault();
-                // console.log(user.id)
-                dispatch(fetchLogout(user.id));
-                // console.log('ok')
+                dispatch(fetchLogout(tokens.accessToken));
               }
-
               navigate(path)
             }
 

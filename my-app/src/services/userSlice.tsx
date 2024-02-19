@@ -13,8 +13,8 @@ export const fetchLogin = createAsyncThunk(
 
 export const fetchLogout = createAsyncThunk(
   'logout/fetchLogout',
-  async (id:string) => {
-    const response = await UserApi.logout(id);
+  async (accessToken : string) => {
+    const response = await UserApi.logout(accessToken);
     return response;
   }
 )
@@ -25,8 +25,13 @@ export const userSlice = createSlice({
   name: 'user',
   initialState: {
     user: {
-      email: '',
-      id: ''
+      tokens: {
+        accessToken:'',
+      },
+      user: {
+        email: '',
+        id: ''
+      }
     }
   },
 
@@ -40,14 +45,18 @@ export const userSlice = createSlice({
     builder
     
     .addCase(fetchLogin.fulfilled, (state, action) => {
-      state.user = action.payload.data.user;
+      state.user = action.payload.data;
     })
 
-    .addCase(fetchLogout.fulfilled, (state) => {
-      state.user = {
-        email: '',
-        id: ''
-      } 
+    .addCase(fetchLogout.fulfilled, (state, action) => {
+      // state.user = {
+      //   token: {},
+      //   user: {
+      //     email: '',
+      //     id: ''
+      //   }
+      // } 
+      state.user = action.payload.data;
     })
   }
 })

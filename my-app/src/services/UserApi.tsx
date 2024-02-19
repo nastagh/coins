@@ -36,7 +36,11 @@ export default class UserApi {
     })
   }
 
-  static async logout(id: string) {
-    return instance.delete(`${baseUrl}/${paths.session}${paths.user}${id}`)
+  static async logout(accessToken : string) {
+    return instance.delete(`${baseUrl}/${paths.session}`, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    })
   }
 }
