@@ -19,12 +19,12 @@ export enum HomePageButtons {
   Sessions = 'sessions',
   Transactions ='transactions',
   PersonalData ='personal Data',
-  Lougout = 'lougout'
+  Logout = 'logout'
 }
 
 export const ArrayHomePageButtons = [
   HomePageButtons.Sessions,
   HomePageButtons.Transactions,
   HomePageButtons.PersonalData,
-  HomePageButtons.Lougout,
+  HomePageButtons.Logout,
 ]

@@ -4,6 +4,7 @@ import '../styles/homePage.scss';
 import { ArrayHomePageButtons, HomePageButtons } from "utils/info";
 import { useNavigate } from "react-router-dom";
 import { fetchLogout } from "services/userSlice";
+import { getCorrectButtonName, getCorrectPath } from "utils/functions";
 
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
@@ -15,6 +16,14 @@ const HomePage = () => {
   const user = useAppSelector((state) => state.user.user.user);
   const tokens = useAppSelector(state => state.user.user.tokens)
 
+
+  const handleClick = (e: React.SyntheticEvent) => {
+    if ((e.target as HTMLDivElement).textContent?.toLowerCase() === HomePageButtons.Logout) {
+      e.preventDefault();
+      dispatch(fetchLogout(tokens.accessToken));
+    }
+  }
+
   return (
     <div className="home-page-wrapper">
       <h1 className="home-page-title">
@@ -22,18 +31,13 @@ const HomePage = () => {
       </h1>
       <div className="home-page-buttons-container">
         {ArrayHomePageButtons.map(button => {
-          const path = (button === HomePageButtons.Lougout) ? '/login' : `/${button.split(' ').join('')}`;
+          const path = getCorrectPath(button);
           return (
             <div className="home-page-buttons" onClick={(e) => {
-              if ((e.target as HTMLDivElement).textContent?.toLowerCase() === HomePageButtons.Lougout) {
-                e.preventDefault();
-                dispatch(fetchLogout(tokens.accessToken));
-              }
+              handleClick(e);
               navigate(path)
-            }
-
-            }>
-              {button.replace(button[0], button[0].toUpperCase())}
+            }}>
+              {getCorrectButtonName(button)}
             </div>
           )
         })
