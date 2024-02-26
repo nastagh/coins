@@ -15,6 +15,10 @@ export const passwordEyes = {
   eyeClose: '../assets/images/hidden.svg'
 }
 
+export const lockerImg = {
+  locker: '../assets/images/lock.svg'
+}
+
 export enum HomePageButtons {
   Sessions = 'sessions',
   Transactions ='transactions',

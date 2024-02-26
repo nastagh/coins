@@ -3,10 +3,10 @@ import { AppDispatch, RootState } from "store";
 import '../styles/homePage.scss';
 import { ArrayHomePageButtons, HomePageButtons } from "utils/info";
 import { useNavigate } from "react-router-dom";
-import { fetchLogout } from "services/userSlice";
+import { fetchData, fetchLogout } from "services/userSlice";
 import { getCorrectButtonName, getCorrectPath } from "utils/functions";
 
-const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 
 const HomePage = () => {
@@ -18,9 +18,14 @@ const HomePage = () => {
 
 
   const handleClick = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+
     if ((e.target as HTMLDivElement).textContent?.toLowerCase() === HomePageButtons.Logout) {
-      e.preventDefault();
       dispatch(fetchLogout(tokens.accessToken));
+    }
+
+    if ((e.target as HTMLDivElement).textContent?.toLowerCase() === HomePageButtons.PersonalData.toLowerCase()) {
+      dispatch(fetchData(tokens.accessToken));
     }
   }
 
@@ -35,7 +40,7 @@ const HomePage = () => {
           return (
             <div className="home-page-buttons" onClick={(e) => {
               handleClick(e);
-              navigate(path)
+              navigate(path);
             }}>
               {getCorrectButtonName(button)}
             </div>

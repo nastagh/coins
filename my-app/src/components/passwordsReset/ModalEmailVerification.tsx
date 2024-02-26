@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { DialogContent, DialogTitle } from "@mui/joy";
 import '../../styles/modal.scss';
 import { ModalPropsType } from "./ModalForgetPassword";
-import InputEmail from "../InputEmail";
+import InputDif from "../InputDif";
 import UserApi from "services/UserApi";
 import { ErrorMessages } from "./ModalResetPassword";
 
@@ -41,7 +41,7 @@ const ModalEmailVerification: React.FC<ModalPropsType> = ({ onSubmit, data }) =>
       <form onSubmit={handleSubmit}>
         <Stack spacing={5}>
           <div>
-            <InputEmail name="code" placeholder="Email Verification Code" className="modal-input" type="number" />
+            <InputDif name="code" placeholder="Email Verification Code" className="modal-input" type="number" />
             {showMessage && <p className="message-code">{showMessage}</p>}
           </div>
           <button type="submit" className="modal-submit-button">

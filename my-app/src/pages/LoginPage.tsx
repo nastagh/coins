@@ -2,8 +2,8 @@ import { Typography } from '@mui/material';
 import '../styles/login.scss';
 import { useState } from 'react';
 import AdditionalButtonsSignIn from 'components/AdditionalButtonsSignIn';
-import Form from 'components/Form';
-import InputEmail from 'components/InputEmail';
+import Form from 'components/FormLogin';
+import InputDif from 'components/InputDif';
 import InputPassword from 'components/InputPassword';
 import ButtonSignIn from 'components/ButtonSignIn';
 import ModalForgetPassword from 'components/passwordsReset/ModalForgetPassword';
@@ -72,7 +72,7 @@ const LoginPage = () => {
           <span></span>
         </div>
         <Form >
-          <InputEmail name={InputName.Email} placeholder='Email' className='form-input' />
+          <InputDif name={InputName.Email} placeholder='Email' className='form-input' />
           <InputPassword name={InputName.Password} placeholder='Password' className='form-input' />
           <div className='text-forgot'>
             <span className='link' onClick={() => {

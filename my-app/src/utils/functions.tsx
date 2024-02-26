@@ -8,7 +8,6 @@ export const validatePassword = (password: string) => {
         return true;
       }
     }
-
   } else {
     return false;
   }

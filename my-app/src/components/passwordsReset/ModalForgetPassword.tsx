@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { DialogContent, DialogTitle } from "@mui/joy";
 import '../../styles/modal.scss';
 import { PasswordResetData } from "pages/LoginPage";
-import InputEmail from "../InputEmail";
+import InputDif from "../InputDif";
 import UserApi from "services/UserApi";
 
 export type ModalPropsType = {
@@ -42,7 +42,7 @@ const ModalForgetPassword: React.FC<ModalPropsType> = ({ onSubmit }) => {
       <form onSubmit={handleSubmit}>
         <Stack spacing={5}>
           <div>
-            <InputEmail name="email" placeholder="Email address" className="modal-input" />
+            <InputDif name="email" placeholder="Email address" className="modal-input" />
             {showMessage && <p className="message-code">**You must to write Email address</p>}
           </div>
           <button type="submit" className="modal-submit-button">

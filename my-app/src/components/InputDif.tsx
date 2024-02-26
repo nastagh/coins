@@ -1,15 +1,16 @@
 import React from 'react';
 
-type InputEmailType = {
+type InputDifType = {
 
   name: string,
   type?: string,
   placeholder: string
-  className: string
+  className: string,
+  value?: string
 }
 
-const InputEmail: React.FC<InputEmailType> = (props) => {
+const InputDif: React.FC<InputDifType> = (props) => {
   return <input {...props} className={props.className} type={props.type ? props.type : 'email'}/>;
 };
 
-export default InputEmail;
+export default InputDif;

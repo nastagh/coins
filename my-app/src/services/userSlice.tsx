@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "store";
 import UserApi from "./UserApi";
-import { LoginProps } from "components/Form";
+import { LoginProps } from "components/FormLogin";
+import { PersonalDataProps } from "components/FormPersonData";
 
 export const fetchLogin = createAsyncThunk(
   'login/fetchLogin',
@@ -19,6 +20,22 @@ export const fetchLogout = createAsyncThunk(
   }
 )
 
+export const fetchData = createAsyncThunk(
+  'getData/fetchData',
+  async (accessToken : string) => {
+    const response = await UserApi.getPersonalData(accessToken);
+    return response;
+  }
+)
+
+export const fetchChangeData = createAsyncThunk(
+  'changeData/fetchData',
+  async (data: PersonalDataProps) => {
+    const response = await UserApi.changePersonalData(data);
+    return response;
+  }
+)
+
 
 
 export const userSlice = createSlice({
@@ -32,13 +49,18 @@ export const userSlice = createSlice({
         email: '',
         id: ''
       }
+    },
+
+    data: {
+      username: '',
+      firstname: '',
+      lastname: '',
+      dateOfBirth: '',
+      gender: '',
     }
   },
 
   reducers: {
-    // logout: (state: RootState) => {
-    //   state.user = { email: ''}
-    // }
   },
 
   extraReducers: (builder) => {
@@ -49,14 +71,11 @@ export const userSlice = createSlice({
     })
 
     .addCase(fetchLogout.fulfilled, (state, action) => {
-      // state.user = {
-      //   token: {},
-      //   user: {
-      //     email: '',
-      //     id: ''
-      //   }
-      // } 
       state.user = action.payload.data;
+    })
+
+    .addCase(fetchData.fulfilled, (state,action) => {
+      state.data = action.payload.data;
     })
   }
 })

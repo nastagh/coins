@@ -7,7 +7,7 @@ import { AppDispatch } from 'store';
 import { useNavigate } from 'react-router-dom';
 
 
-type FormType = {
+export type FormType = {
   children: ReactNode;
 }
 
@@ -16,7 +16,7 @@ export type LoginProps = {
   password: string
 }
 
-const Form: React.FC<FormType> = ({ children }) => {
+const FormLogin: React.FC<FormType> = ({ children }) => {
 
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,17 +28,6 @@ const Form: React.FC<FormType> = ({ children }) => {
     const password = formData.get('password') as string;
 
     dispatch(fetchLogin({ email, password })).then(() => navigate('/home'))
-
-
-
-    // if (email !== '') {
-    //   dispatch(UserApi.login(email,password)).then(() => {
-    //     navigate('/home')
-    //   })
-    // } 
-
-
-    // console.log(formJson);
   }
 
   return (
@@ -50,4 +39,4 @@ const Form: React.FC<FormType> = ({ children }) => {
   )
 }
 
-export default Form;
+export default FormLogin;
